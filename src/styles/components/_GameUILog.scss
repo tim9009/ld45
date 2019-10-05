@@ -3,4 +3,13 @@
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
+
+	&__message {
+		margin-bottom: 10px;
+
+		&__time {
+			font-style: 12px;
+			color: map-get($colors, gray);
+		}
+	}
 }

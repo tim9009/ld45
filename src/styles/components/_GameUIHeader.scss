@@ -15,12 +15,12 @@
 			fill: map-get($colors, backgroundSecondary);
 		}
 
-		.connection {
-			margin-right: 10px;
+		& .active path {
+			animation: blinkAlert 500ms infinite;
 		}
 
-		.alert {
-
+		.connection {
+			margin-right: 10px;
 		}
 	}
 }

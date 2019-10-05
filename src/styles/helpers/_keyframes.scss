@@ -1,9 +1,13 @@
-@keyframes fadeIn {
+@keyframes blinkAlert {
 	0% {
-		opacity: 0;
+		fill: map-get($colors, backgroundSecondary);
+	}
+
+	50% {
+		fill: map-get($colors, statusAlert);
 	}
 
 	100% {
-		opacity: 1;
+		fill: map-get($colors, backgroundSecondary);
 	}
 }
