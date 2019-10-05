@@ -1,0 +1,61 @@
+.button,
+button,
+[type='button'],
+[type='submit'] {
+	display: inline-block;
+	border: none;
+	@include padding(medium, large);
+	@include margin(medium, null);
+	
+	font-family: map-get($fonts, secondary);
+	text-decoration: none;
+	font-weight: bold;
+	text-align: left;
+
+	border-radius: 8px;
+	background-color: map-get($colors, primary);
+	color: #fff;
+
+
+	&:hover,
+	&:focus {
+		cursor: pointer;
+		background-color: darken( map-get($colors, primary), 10% );
+
+		.icon {
+			left: 5px;
+		}
+	}
+
+	&:active {
+		opacity: 0.8;
+	}
+
+	.icon {
+		left: 0;
+		position: relative;
+		margin-left: 25px;
+		transition: left 100ms ease-out;
+	}
+}
+
+.button {
+	&--fullWidth {
+		width: 100%;
+		text-align: center;
+	}
+}
+
+.buttonContainer {
+	.button {
+		@include margin(null, small);
+
+		& > *:first-child {
+			margin-left: 0;
+		}
+
+		& > *:last-child {
+			margin-right: 0;
+		}
+	}
+}

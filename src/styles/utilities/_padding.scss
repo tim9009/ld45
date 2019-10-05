@@ -1,0 +1,33 @@
+.pt {
+	&--0 {
+		margin-top: 0!important;
+	}
+
+	&--large {
+		@include padding(large, null, null, null);
+	}
+	&--xlarge {
+		@include padding(xlarge, null, null, null);
+	}
+}
+
+.pb {
+	&--0 {
+		margin-bottom: 0!important;
+	}
+
+	&--small {
+		@include padding(null, null, small, null);
+	}
+
+	&--medium {
+		@include padding(null, null, medium, null);
+	}
+
+	&--large {
+		@include padding(null, null, large, null);
+	}
+	&--xlarge {
+		@include padding(null, null, large, null);
+	}
+}

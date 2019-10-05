@@ -1,0 +1,161 @@
+///// BREAKPOINTS /////
+@mixin breakpoint($breakpoint) {
+	$direction: up;
+
+	@if length($breakpoint) > 1 {
+		$direction: nth($breakpoint, 2);
+		$breakpoint: nth($breakpoint, 1);
+	}
+
+	$breakpointValue: map-get($breakpoints, $breakpoint);
+	$nextBreakpoint: map-next($breakpoints, $breakpoint);
+	$nextBreakpointValue: if($nextBreakpoint, map-get($breakpoints, $nextBreakpoint), false);
+
+	$queryString: 'screen and ';
+
+	@if $direction == up {
+		$queryString: $queryString + '(min-width: #{$breakpointValue})';
+	}
+	@else if $direction == down {
+		$queryString: $queryString + '(max-width: #{$nextBreakpointValue})';
+	}
+	@else if $direction == only {
+		$queryString: $queryString + '(min-width: #{$breakpointValue}) and (max-width: #{$nextBreakpointValue})';
+	}
+
+	@media #{$queryString} {
+		@content;
+	}
+}
+
+@mixin margin($top:false, $right:false, $bottom:false, $left:false) {
+	// Emulate CSS
+	@if $top != false and $right == false and $bottom == false and $left == false {
+		$right: $top;
+		$bottom: $top;
+		$left: $top;
+	}
+
+	@if $top != false and $bottom == false {
+		$bottom: $top;
+	}
+
+	@if $right != false and $left == false {
+		$left: $right;
+	}
+
+	// Loop through every breakpoint
+	@each $sizeName, $size in $breakpoints {
+		@include breakpoint($sizeName) {
+			// Top
+			@if $top != null {
+				@if map-has-key($margins, $top) {
+					@if map-has-key(map-get($margins, $top), $sizeName) {
+						margin-top: map-get(map-get($margins, $top), $sizeName);
+					}
+				} @else {
+					margin-top: $top;
+				}
+			}
+
+			// Right
+			@if $right != null {
+				@if map-has-key($margins, $right) {
+					@if map-has-key(map-get($margins, $right), $sizeName) {
+						margin-right: map-get(map-get($margins, $right), $sizeName);
+					}
+				} @else {
+					margin-right: $right;
+				}
+			}
+
+			// Bottom
+			@if $bottom != null {
+				@if map-has-key($margins, $bottom) {
+					@if map-has-key(map-get($margins, $bottom), $sizeName) {
+						margin-bottom: map-get(map-get($margins, $bottom), $sizeName);
+					}
+				} @else {
+					margin-bottom: $bottom;
+				}
+			}
+
+			// Left
+			@if $left != null {
+				@if map-has-key($margins, $left) {
+					@if map-has-key(map-get($margins, $left), $sizeName) {
+						margin-left: map-get(map-get($margins, $left), $sizeName);
+					}
+				} @else {
+					margin-left: $left;
+				}
+			}
+		}
+	}
+}
+
+@mixin padding($top:false, $right:false, $bottom:false, $left:false) {
+	// Emulate CSS
+	@if $top != false and $right == false and $bottom == false and $left == false {
+		$right: $top;
+		$bottom: $top;
+		$left: $top;
+	}
+
+	@if $top != false and $bottom == false {
+		$bottom: $top;
+	}
+
+	@if $right != false and $left == false {
+		$left: $right;
+	}
+
+	// Loop through every breakpoint
+	@each $sizeName, $size in $breakpoints {
+		@include breakpoint($sizeName) {
+			// Top
+			@if $top != null {
+				@if map-has-key($paddings, $top) {
+					@if map-has-key(map-get($paddings, $top), $sizeName) {
+						padding-top: map-get(map-get($paddings, $top), $sizeName);
+					}
+				} @else {
+					padding-top: $top;
+				}
+			}
+
+			// Right
+			@if $right != null {
+				@if map-has-key($paddings, $right) {
+					@if map-has-key(map-get($paddings, $right), $sizeName) {
+						padding-right: map-get(map-get($paddings, $right), $sizeName);
+					}
+				} @else {
+					padding-right: $right;
+				}
+			}
+
+			// Bottom
+			@if $bottom != null {
+				@if map-has-key($paddings, $bottom) {
+					@if map-has-key(map-get($paddings, $bottom), $sizeName) {
+						padding-bottom: map-get(map-get($paddings, $bottom), $sizeName);
+					}
+				} @else {
+					padding-bottom: $bottom;
+				}
+			}
+
+			// Left
+			@if $left != null {
+				@if map-has-key($paddings, $left) {
+					@if map-has-key(map-get($paddings, $left), $sizeName) {
+						padding-left: map-get(map-get($paddings, $left), $sizeName);
+					}
+				} @else {
+					padding-left: $left;
+				}
+			}
+		}
+	}
+}

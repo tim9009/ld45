@@ -1,0 +1,9 @@
+.animate {
+	&--backgroundColor {
+		transition: background-color 400ms ease-in;
+
+		&:not(.active) {
+			background-color: map-get($colors, lightGray);
+		}
+	}
+}

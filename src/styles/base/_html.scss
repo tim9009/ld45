@@ -1,0 +1,25 @@
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: $bodyFont;
+	font-size: $bodyFontSize;
+	font-weight: $bodyFontWeight;
+	line-height: $bodyLineHeight;
+	color: $bodyFontColor;
+	background-color: map-get($colors, backgroundPrimary);
+	margin: 0;
+
+	//animation: fadeIn 800ms ease-in;
+
+	@media (max-width: 650px) {
+		font-size: $bodyFontSizeMobile;
+	}
+}

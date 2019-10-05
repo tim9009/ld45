@@ -1,0 +1,126 @@
+///// TABLE OF CONTENTS /////
+///// #1 BREAKPOINTS
+///// #2 FONTS
+///// #3 COLORS
+///// #4 ICONS
+///// #5 BORDERS
+///// #6 TRANSISIONS AND ANIMATIONS
+///// #7 TEXT
+///// #8 SPACING
+
+
+
+///// #1 BREAKPOINTS /////
+$breakpoints: (
+	small: 0,
+	medium: 640px,
+	large: 1024px,
+	xlarge: 1200px,
+	xxlarge: 1440px,
+);
+
+
+///// #2 FONTS /////
+$fonts: (
+	primary: ('Lato', sans-serif),
+	secondary: ('Lato', sans-serif),
+);
+
+$bodyFont: map-get($fonts, primary);
+$headingFont: map-get($fonts, secondary);
+
+
+///// #3 COLORS /////
+$colors: (
+	primary: #190E18,
+	secondary: #836C2F,
+	// tertiary: #000,
+	backgroundPrimary: #FFFFFF,
+	backgroundSecondary: #D7D7D7,
+
+	white: #ffffff,
+	black: #000000,
+	darkGray: #2f2f2f,
+	gray: #969696,
+	lightGray: #D7D7D7,
+
+	statusGood: #79CF52,
+	statusWarning: #CFB652,
+	statusAlert: #CF5252
+);
+
+
+
+///// #4 ICONS /////
+$icons: (
+	
+);
+
+
+
+///// #5 BORDERS ////
+$border: solid 1px map-get($colors, gray);
+
+
+
+///// #6 TRANSISIONS AND ANIMATIONS ////
+$transisionFast: all ease-in-out 150ms;
+$transisionMedium: all ease-in-out 300ms;
+$transisionSlow: all ease-in-out 600ms;
+
+
+
+///// #7 TEXT /////
+$bodyFontSize: 14px;
+$bodyFontSizeMobile: 14px;
+$bodyFontColor: map-get($colors, darkGray);
+$bodyFontWeight: 300;
+$bodyLineHeight: 1.5;
+
+$headingFontColor: map-get($colors, black);
+$headingFontWeight: 300;
+$headingLineHeight: 1;
+
+
+///// #8 SPACING /////
+$margins: (
+	small: (
+		small: 5px,
+		medium: 8px,
+	),
+	medium: (
+		small: 15px,
+		medium: 20px,
+	),
+	large: (
+		small: 20px,
+		medium: 25px,
+		large: 30px,
+	),
+	xlarge: (
+		small: 40px,
+		medium: 45px,
+		large: 50px,
+	)
+);
+
+$paddings: (
+	small: (
+		small: 5px,
+		medium: 8px,
+	),
+	medium: (
+		small: 15px,
+		medium: 20px,
+	),
+	large: (
+		small: 20px,
+		medium: 25px,
+		large: 30px,
+	),
+	xlarge: (
+		small: 40px,
+		medium: 45px,
+		large: 50px,
+	)
+);

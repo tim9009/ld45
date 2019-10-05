@@ -1,0 +1,12 @@
+.Game {
+	height: 100vh;
+    width: 100vw;
+    position: relative;
+	background-color: map-get($colors, primary);
+}
+
+.GameUIContainerLeft {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+}

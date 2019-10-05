@@ -1,0 +1,25 @@
+.link {
+	&--icon {
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+
+		.link__icon {
+			height: 16px;
+			display: inline-block;
+			@include margin(null, small, null, null);
+			text-decoration: none;
+			font-size: 16px;
+			line-height: 1;
+
+			&:before {
+				height: 16px;
+			}
+		}
+
+		.link__text {
+			display: inline-block;
+			text-decoration: underline;
+		}
+	}
+}

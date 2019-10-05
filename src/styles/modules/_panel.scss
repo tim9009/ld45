@@ -1,0 +1,18 @@
+.UIpanel {
+	background-color: #fff;
+
+	@include padding(medium);
+
+	& > *:first-child:not(.grid) {
+		margin-top: 0;
+	}
+
+	& > *:last-child:not(.grid) {
+		margin-bottom: 0;
+	}
+
+	&__title {
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
+}

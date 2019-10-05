@@ -1,0 +1,45 @@
+.GameUIResources {
+	width: 280px;
+
+	&__resource {
+		width: 100%;
+		margin-bottom: 10px;
+
+		&__title {
+			font-size: 14px;
+			margin-bottom: 3px;
+		}
+
+		&__indicator {
+			width: 100%;
+			height: 10px;
+			position: relative;
+			border-radius: 10px;
+			background-color: map-get($colors, backgroundSecondary);
+
+			&:after {
+				content: '';
+				height: 10px;
+				width: 0;
+				display: block;
+				border-radius: 10px;
+				background-color: map-get($colors, statusGood);
+				transition: ease-in-out all 500ms;
+			}
+
+			@for $percent from 1 through 100 {
+				&[value="#{$percent}"]:after {
+					$decimal: $percent / 100;
+					width: percentage($decimal);
+					@if $percent > 66 {
+						background-color: map-get($colors, statusGood);
+					} @else if $percent > 33 {
+						background-color: map-get($colors, statusWarning);
+					} @else if $percent < 33 {
+						background-color: map-get($colors, statusAlert);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,52 @@
+$gridGutters: 10px;
+
+.grid {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	&--marginsX,
+	&--marginsXY {
+		margin-left: -$gridGutters;
+		margin-right: -$gridGutters;
+
+		& > [class*='col-'] {
+			margin-right: $gridGutters;
+			margin-left: $gridGutters;
+		}
+	}
+
+	&--marginsY,
+	&--marginsXY {
+		margin-bottom: -$gridGutters * 2;
+
+		& > [class*='col-'] {
+			margin-bottom: $gridGutters * 2;
+		}
+	}
+}
+
+// Columns
+[class*='col-'] {
+	flex: 0;
+	flex-grow: 0;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+// Loop through breakpoints
+@each $sizeName, $size in $breakpoints {
+	@include breakpoint($sizeName) {
+		// Generate column classes
+		@for $i from 1 through 12 {
+			.grid--marginsX > .col-#{$sizeName}-#{$i},
+			.grid--marginsXY > .col-#{$sizeName}-#{$i} {
+				flex-basis: calc(100% / 12 * #{$i} - #{$gridGutters * 2});
+			}
+
+			.col-#{$sizeName}-#{$i} {
+				flex-basis: calc(100% / 12 * #{$i});
+			}
+		}
+	}
+}

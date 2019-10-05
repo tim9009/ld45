@@ -1,0 +1,15 @@
+@function map-next($map, $key) {
+	$mapKeys: map-keys($map);
+	$mapLength: length($map);
+	$nextKeyIndex: (index($mapKeys, $key)) + 1;
+
+	// Set default return value
+	$nextKey: false;
+
+	// Get next key if not last key
+	@if($nextKeyIndex <= $mapLength) {
+		$nextKey : nth($mapKeys, $nextKeyIndex);
+	}
+
+	@return $nextKey;
+}

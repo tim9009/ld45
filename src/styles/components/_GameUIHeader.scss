@@ -1,0 +1,26 @@
+.GameUIHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	@include padding(small, medium);
+	font-size: 0;
+	background-color: #fff;
+
+	&__logo {
+		width: 175px;
+	}
+
+	&__icons {
+		path {
+			fill: map-get($colors, backgroundSecondary);
+		}
+
+		.connection {
+			margin-right: 10px;
+		}
+
+		.alert {
+
+		}
+	}
+}
