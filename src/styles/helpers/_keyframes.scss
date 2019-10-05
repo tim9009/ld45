@@ -11,3 +11,13 @@
 		fill: map-get($colors, backgroundSecondary);
 	}
 }
+
+@keyframes fillLoadingIndicator {
+	0% {
+		width: 0;
+	}
+
+	100% {
+		width: 100%;
+	}
+}
