@@ -1,38 +1,4 @@
 .GameUIProgression {
 	width: 280px;
 	margin-bottom: 10px;
-
-	&__task {
-		margin-bottom: 10px;
-
-		&__checkbox {
-			width: 16px;
-			height: 16px;
-			display: inline-block;
-			position: relative;
-			margin-right: 6px;
-			margin-bottom: -3px;
-			border: solid 1px #000;
-			border-radius: 100%;
-
-			&.checked:after {
-				content: '';
-				width: 8px;
-				height: 8px;
-				display: block;
-				border-radius: 100%;
-				position: relative;
-				top: 50%;
-				left: 50%;
-				transform: translateY(-50%) translateX(-50%);
-				background-color: #000;
-			}
-		}
-
-		&__text {
-			display: inline;
-			font-size: $bodyFontSize;
-		}
-
-	}
 }

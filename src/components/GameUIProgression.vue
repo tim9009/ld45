@@ -1,21 +1,26 @@
 <template>
   <div class="GameUIProgression UIpanel">
     <h1 class="UIpanel__title">Mission plan (revised)</h1>
-    <div class="GameUIProgression__task">
-      <div class="GameUIProgression__task__checkbox"></div>
-      <h2 class="GameUIProgression__task__text">Gather fire sticks.</h2>
-    </div>
-
-    <div class="GameUIProgression__task">
-      <div class="GameUIProgression__task__checkbox checked"></div>
-      <h2 class="GameUIProgression__task__text">Survive and don't die and such, you know?</h2>
-    </div>
+    <GameUIProgressionTask v-for="task in tasks" v-bind:key="task.id" v-bind:checked="task.checked" v-bind:text="task.text"/>
   </div>
 </template>
 
 <script>
+  import GameUIProgressionTask from './GameUIProgressionTask.vue'
   export default {
-    name: 'GameUIProgression'
+    name: 'GameUIProgression',
+    components: {
+      GameUIProgressionTask
+    },
+    data() {
+      return {
+        tasks: [{
+          id: 0,
+          checked: false,
+          text: 'This is a text'
+        }]
+      }
+    }
   }
 </script>
 
