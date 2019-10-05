@@ -1,4 +1,4 @@
-# game
+# LD45
 
 ## Project setup
 ```
