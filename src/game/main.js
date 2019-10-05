@@ -1,24 +1,26 @@
 ////////////////////////////// GAME VARIABLES //////////////////////////////
 
-import Vroom from './vroom/vroom'
+import { Vroom } from './vroom/vroom'
+
+import astronaut from './astronaut'
 
 import store from '@/store';
 
 function initEngine() {
 	Vroom.init({
 		dim: {
-			width: 320,
-			height: 180,
+			width: 1920,
+			height: 1080,
 		},
 		fps: 60,
 		inputPreventDefault: [32, 17, 37, 38, 39, 40],
 		backgroundColor: '#190E18',
 		physics: {
-			physicsEnabled: true,
-			gravityEnabled: true,
+			physicsEnabled: false,
+			gravityEnabled: false,
 			gravity: {
 				x: 0,
-				y: 0.0003,
+				y: 0,
 			},
 			friction: {
 				x: 0.999,
@@ -26,6 +28,11 @@ function initEngine() {
 			}
 		},
 	});
+
+	Vroom.updateSize();
+
+	// Init call
+	astronaut.init();
 }
 
 function startGame() {
@@ -34,10 +41,11 @@ function startGame() {
 		y: Vroom.dim.height / 2,
 	};
 
-	Vroom.activateCamera(Vroom.createCamera(startPos.x, startPos.y, 1, 'both', 0.007));
+	Vroom.activateCamera(Vroom.createCamera(0, 0, 1, 'both', 0));
+	Vroom.activeCamera.follow(astronaut._id);
 
 	// Disable image smooting
-	var imageSmoothingEnabled = false;
+	var imageSmoothingEnabled = true;
 	Vroom.ctx.mozImageSmoothingEnabled = imageSmoothingEnabled;
 	Vroom.ctx.webkitImageSmoothingEnabled = imageSmoothingEnabled;
 	Vroom.ctx.msImageSmoothingEnabled = imageSmoothingEnabled;
@@ -50,8 +58,13 @@ function startGame() {
 
 	// Set focus on window to make the game work when played in an iFrame
 	window.focus();
-	
+
 	console.log('Game started!')
+}
+
+function updateViewportSize() {
+	Vroom.updateSize()
+	Vroom.activeCamera.follow(astronaut._id)
 }
 
 Vroom.mainUpdateLoopExtension = function() {
@@ -60,5 +73,6 @@ Vroom.mainUpdateLoopExtension = function() {
 
 export default {
 	initEngine,
-	startGame
+	startGame,
+	updateViewportSize
 };

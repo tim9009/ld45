@@ -1,12 +1,16 @@
-var entityName = new VroomEntity(false);
+import { Vroom, VroomEntity } from './vroom/vroom'
+
+var astronaut = new VroomEntity(false);
 
 // Init function for module. NOTE: default arguments are placeholders and need to be replaced or defined.
-entityName.init = function(physicsEnabled, physicsEntityType, physicsCollisionType) {
+astronaut.init = function() {
+	this._id = Vroom.generateID();
+
 	this.layer = 1;
 
 	this.dim = {
-		width: 0,
-		height: 0,
+		width: 100,
+		height: 100,
 	};
 
 	this.updateBounds();
@@ -24,24 +28,28 @@ entityName.init = function(physicsEnabled, physicsEntityType, physicsCollisionTy
 	this.attributeOne = "Hello World";
 
 	// Register entity
-	Vroom.registerEntity(entityName);
+	Vroom.registerEntity(astronaut);
 };
 
 // Collision event function. Is called every tick the entity is colliding.
-entityName.onCollision = function(target) {
+astronaut.onCollision = function(target) {
 	
 };
 
 // Update function. Handles all logic for objects related to this module.
-entityName.update = function(step) {
+astronaut.update = function(step) {
 
 };
 
 // Render function. Draws all elements related to this module to screen.
-entityName.render = function(camera) {
+astronaut.render = function(camera) {
+	var relativePos = {
+		x: this.pos.x - camera.pos.x,
+		y: this.pos.y - camera.pos.y,
+	};
+
 	Vroom.ctx.fillStyle = 'red';
-	Vroom.ctx.fillRect(this.pos.x, this.pos.y, this.dim.width, this.dim.height);
+	Vroom.ctx.fillRect(relativePos.x, relativePos.y, this.dim.width, this.dim.height);
 };
 
-// Init call
-entityName.init();
+export default astronaut;

@@ -2,13 +2,14 @@
   <div class="GameUIStartScreen">
       <div v-if="!loginDone" class="GameUIStartScreen__login UIpanel">
         <img class="GameUIStartScreen__logo" src="../assets/logo.png">
+        <form v-on:submit="start">
+          <label>Username</label>
+          <input type="text">
 
-        <label>Username</label>
-        <input type="text">
-
-        <label>Password</label>
-        <input type="password">
-        <a href="#" class="GameUIStartButton button" v-on:click="start">Connect to offworld mission</a>
+          <label>Password</label>
+          <input type="password">
+          <input type="submit" class="GameUIStartButton button" v-on:click="start" value="Connect to offworld mission">
+        </form>
       </div>
 
       <div v-if="!loginDone" class="GameUIStartScreen__postit">

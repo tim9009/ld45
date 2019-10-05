@@ -1,6 +1,6 @@
 <template>
   <div class="Game">
-    <canvas id="vroom-canvas"></canvas>
+    <canvas id="vroom-canvas" width="1920" height="1080"></canvas>
 
     <GameUIHeader/>
 
@@ -20,6 +20,8 @@
 <script>
   import store from '@/store'
 
+  import { Vroom } from '../game/vroom/vroom'
+
   import GameUILogin from './GameUILogin.vue'
   import GameUIHeader from './GameUIHeader.vue'
   import GameUIProgression from './GameUIProgression.vue'
@@ -38,7 +40,20 @@
       GameUIResources,
       GameUILog
     },
+    created() {
+      window.addEventListener("resize", this.handleWindowResize)
+    },
+    destroyed() {
+      window.removeEventListener("resize", this.handleWindowResize)
+    },
+    updated() {
+      game.updateViewportSize()
+      console.log('trigg')
+    },
     methods: {
+      handleWindowResize() {
+        Vroom.updateSize()
+      }
     },
     computed: {
       gameStarted() {

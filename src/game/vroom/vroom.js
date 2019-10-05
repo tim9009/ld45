@@ -1,4 +1,4 @@
-var Vroom = {
+export const Vroom = {
 	////////////////////////////// INIT //////////////////////////////
 	init: function(options) {
 		// Canvas
@@ -148,6 +148,31 @@ var Vroom = {
 		Vroom.usedIDList[ID] = ID;
 
 		return ID;
+	},
+
+	updateSize: function() {
+		Vroom.canvas.width  = window.innerWidth;
+		Vroom.canvas.height  = window.innerHeight;
+
+		Vroom.ctx.width = Vroom.canvas.width;
+		Vroom.ctx.height = Vroom.canvas.height;
+
+		Vroom.dim.width = Vroom.canvas.width;
+		Vroom.dim.height = Vroom.canvas.height;
+
+		Vroom.setCanvasScale();
+
+		// Update camera
+
+		if(Vroom.activeCamera && Vroom.activeCamera.followingID !== null) {
+			Vroom.activeCamera.follow(Vroom.activeCamera.followingID);
+		}
+
+		// Update cache
+		Vroom.canvasSizeCache.width = Vroom.canvas.width;
+		Vroom.canvasSizeCache.height = Vroom.canvas.height;
+
+		console.log('Size updated');
 	},
 
 	setCanvasScale: function() {
@@ -691,8 +716,7 @@ var Vroom = {
 
 
 ////////////////////////////// VROOM ENTITY CONSTRUCTOR //////////////////////////////
-function VroomEntity(physicsEnabled, physicsEntityType, physicsCollisionType) {
-	this._id = Vroom.generateID();
+export function VroomEntity(physicsEnabled, physicsEntityType, physicsCollisionType) {
 	this.pos = {
 		x: 0,
 		y: 0,
@@ -774,7 +798,7 @@ VroomEntity.NONE = 'none';
 
 
 ////////////////////////////// VROOM CAMERA CONSTRUCTOR //////////////////////////////
-function VroomCamera(x, y, zoom, axis, lerpPercentage) {
+export function VroomCamera(x, y, zoom, axis, lerpPercentage) {
 	this._id = Vroom.generateID();
 	this.pos = {
 		x: x || 0,
@@ -868,7 +892,7 @@ VroomCamera.prototype.adjustZoom = function(zoomAdjustment, lerpPercentage) {
 
 
 ////////////////////////////// VROOM SPRITE CONSTRUCTOR //////////////////////////////
-function VroomSprite(imagePath, animated, timePerAnimationFrame, frameWidth, frameHeight, numberOfFrames, frameSpacing) {
+export function VroomSprite(imagePath, animated, timePerAnimationFrame, frameWidth, frameHeight, numberOfFrames, frameSpacing) {
 	this._id = Vroom.generateID();
 	this.image = new Image();
 	this.image.src = imagePath;
@@ -959,7 +983,7 @@ VroomSprite.prototype.render = function(pos, dim, destinationDim) {
 
 
 ////////////////////////////// VROOM SOUND CONSTRUCTOR //////////////////////////////
-function VroomSound(url) {
+export function VroomSound(url) {
 	this._id = Vroom.generateID();
 	this.ready = false;
 	this.playing = false;
@@ -1026,5 +1050,3 @@ VroomSound.prototype.stop = function() {
 		this.bufferSource.stop();
 	}
 };
-
-export default Vroom;
