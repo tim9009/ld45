@@ -50,6 +50,8 @@ function startGame() {
 
 	// Set focus on window to make the game work when played in an iFrame
 	window.focus();
+	
+	console.log('Game started!')
 }
 
 Vroom.mainUpdateLoopExtension = function() {
