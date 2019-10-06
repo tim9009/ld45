@@ -16,6 +16,9 @@
 	}
 
 	&__icons {
+		position: relative;
+		z-index: 1000;
+
 		path {
 			fill: map-get($colors, backgroundSecondary);
 		}

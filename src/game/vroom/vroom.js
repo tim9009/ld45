@@ -124,7 +124,7 @@ export const Vroom = {
 			}
 		}, 250);
 
-		Vroom.mainUpdateLoopExtension = null;
+		Vroom.mainUpdateLoopExtension = Vroom.mainUpdateLoopExtension || null;
 	},
 
 

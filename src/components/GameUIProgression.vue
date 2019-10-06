@@ -1,24 +1,30 @@
 <template>
   <div class="GameUIProgression UIpanel">
-    <h1 class="UIpanel__title">Mission plan (revised)</h1>
-    <GameUIProgressionTask v-for="task in tasks" v-bind:key="task.id" v-bind:checked="task.checked" v-bind:text="task.text"/>
+    <h1 class="UIpanel__title">Mission plan</h1>
+    <GameUIProgressionTask v-for="task in tasks" v-bind:key="task.id" v-bind:done="task.done" v-bind:text="task.text"/>
   </div>
 </template>
 
 <script>
+  import store from '@/store'
+
   import GameUIProgressionTask from './GameUIProgressionTask.vue'
+
   export default {
     name: 'GameUIProgression',
     components: {
       GameUIProgressionTask
     },
-    data() {
-      return {
-        tasks: [{
-          id: 0,
-          checked: false,
-          text: 'This is a text'
-        }]
+    computed: {
+      tasks() {
+        let availableTasks = []
+        for( let task in store.state.tasks ) {
+          if(store.state.tasks[task].available) {
+            availableTasks.push(store.state.tasks[task])
+          }
+        }
+
+        return availableTasks
       }
     }
   }

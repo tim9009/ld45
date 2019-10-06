@@ -1,6 +1,6 @@
 <template>
   <div class="GameUIResources UIpanel">
-    <h1 class="UIpanel__title">Resources</h1>
+    <h1 class="UIpanel__title">Mission Status</h1>
 
     <div class="GameUIResources__resource">
         <h2 class="GameUIResources__resource__title">Oxygen</h2>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="GameUIResources__resource">
-        <h2 class="GameUIResources__resource__title">Health</h2>
+        <h2 class="GameUIResources__resource__title">Vital Signs</h2>
         <div class="GameUIResources__resource__indicator" v-bind:value="resources.health"></div>
     </div>
   </div>

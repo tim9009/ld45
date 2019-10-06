@@ -1,0 +1,26 @@
+.GameUICommunication {
+	width: 90%;
+	max-width: 1000px;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+
+	&__media {
+		img {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+	}
+
+	&__text {
+		*:first-child {
+			margin-top: 0;
+		}
+
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

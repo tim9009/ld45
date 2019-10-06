@@ -1,6 +1,6 @@
 <template>
   <div class="GameUIProgression__task">
-    <div class="GameUIProgression__task__checkbox" v-bind:class="checked ? 'checked' : ''"></div>
+    <div class="GameUIProgression__task__checkbox" v-bind:class="done ? 'checked' : ''"></div>
     <h2 class="GameUIProgression__task__text">{{ text }}</h2>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
   export default {
     name: 'GameUIProgressionTask',
-    props: ['checked', 'text']
+    props: ['done', 'text']
   }
 </script>
 

@@ -5,6 +5,8 @@ import { Vroom } from './vroom/vroom'
 import astronaut from './astronaut'
 import map from './map'
 
+import { PointOfInterest } from './point_of_interest'
+
 import store from '@/store';
 
 function initEngine() {
@@ -17,7 +19,7 @@ function initEngine() {
 		inputPreventDefault: [32, 17, 37, 38, 39, 40],
 		backgroundColor: '#190E18',
 		physics: {
-			physicsEnabled: false,
+			physicsEnabled: true,
 			gravityEnabled: false,
 			gravity: {
 				x: 0,
@@ -35,6 +37,40 @@ function initEngine() {
 	// Init call
 	astronaut.init();
 	map.init();
+
+	var test = new PointOfInterest({
+		pos: {
+			x: 80,
+			y: 50
+		},
+		communication: {
+			image: '/img/communications/test.jpg',
+			sound: 'https://ia800406.us.archive.org/23/items/PeterHernandezPodcastAudioPlaceholder/AudioPlaceholder.mp3',
+			text: 'Hello World!'
+		},
+		resources: {
+			health: -90
+		}
+	});
+	test.init();
+	Vroom.registerEntity(test);
+
+	var testTwo = new PointOfInterest({
+		pos: {
+			x: 120,
+			y: 80
+		},
+		communication: {
+			image: '/img/communications/test.jpg',
+			sound: 'https://ia800406.us.archive.org/23/items/PeterHernandezPodcastAudioPlaceholder/AudioPlaceholder.mp3',
+			text: 'Hello World!'
+		},
+		resources: {
+			health: -10
+		}
+	});
+	testTwo.init();
+	Vroom.registerEntity(testTwo);
 }
 
 function startGame() {
@@ -43,7 +79,7 @@ function startGame() {
 		y: Vroom.dim.height / 2,
 	};
 
-	Vroom.activateCamera(Vroom.createCamera(0, 0, 1, 'both', 0.001));
+	Vroom.activateCamera(Vroom.createCamera(0, 0, 1, 'both', 0.002));
 	Vroom.activeCamera.follow(astronaut._id);
 	Vroom.activeCamera.pos.x = astronaut.pos.x - (Vroom.dim.width / 2)
 	Vroom.activeCamera.pos.y = astronaut.pos.y - (Vroom.dim.height / 2)
@@ -72,7 +108,10 @@ function updateViewportSize() {
 }
 
 Vroom.mainUpdateLoopExtension = function() {
-	
+	// Check loss condition
+	if(!store.state.gameLost && store.state.resources.health <= 0) {
+		store.state.gameLost = true;
+	}
 };
 
 export default {
