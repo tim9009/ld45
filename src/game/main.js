@@ -43,8 +43,10 @@ function startGame() {
 		y: Vroom.dim.height / 2,
 	};
 
-	Vroom.activateCamera(Vroom.createCamera(0, 0, 1, 'both', 0));
+	Vroom.activateCamera(Vroom.createCamera(0, 0, 1, 'both', 0.001));
 	Vroom.activeCamera.follow(astronaut._id);
+	Vroom.activeCamera.pos.x = astronaut.pos.x - (Vroom.dim.width / 2)
+	Vroom.activeCamera.pos.y = astronaut.pos.y - (Vroom.dim.height / 2)
 
 	// Disable image smooting
 	var imageSmoothingEnabled = true;

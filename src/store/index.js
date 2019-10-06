@@ -4,7 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  gameStarted: false
+  gameStarted: false,
+  resources: {
+  	oxygen: 100,
+  	water: 100,
+  	stamina: 100,
+  	health: 100
+  }
 }
 
 const mutations = {

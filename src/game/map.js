@@ -9,15 +9,15 @@ map.init = function() {
 	this.layer = 1;
 
 	this.dim = {
-		width: 5990,
-		height: 5990,
+		width: 9962,
+		height: 9982,
 	};
 
 	this.updateBounds();
 
 	this.pos = {
-		x: -(5990 / 2),
-		y: -(5990 / 2),
+		x: -(9962 / 2),
+		y: -(9982 / 2),
 	};
 
 	this.vel = {
