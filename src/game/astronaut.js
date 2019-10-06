@@ -20,6 +20,11 @@ astronaut.init = function() {
 		y: 0,
 	};
 
+	this.targetPos = {
+		x: 0,
+		y: 0,
+	};
+
 	this.vel = {
 		x: 0,
 		y: 0,
@@ -38,7 +43,20 @@ astronaut.onCollision = function(target) {
 
 // Update function. Handles all logic for objects related to this module.
 astronaut.update = function(step) {
+	if(Vroom.mouseState.clicked == true) {
+		this.targetPos.x = this.pos.x + Vroom.mouseState.pos.x - (Vroom.dim.width / 2);
+		this.targetPos.y = this.pos.y + Vroom.mouseState.pos.y  - (Vroom.dim.height / 2);
+	}
 
+
+	if(this.pos.x !== this.targetPos.x || this.pos.y !== this.targetPos.y) {
+		var lerpedPos = Vroom.lerpPosition(step, this.pos, this.targetPos, 0.002);
+		this.pos.x += lerpedPos.x;
+		this.pos.y += lerpedPos.y;
+		//console.log(lerpedPos);
+	}
+
+	//console.log(this.pos);
 };
 
 // Render function. Draws all elements related to this module to screen.

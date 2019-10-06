@@ -235,10 +235,18 @@ export const Vroom = {
 		};
 	},
 
-	lerpValue: function(step, value, targetValue, lerpPercentage) {
+	lerpValue: function(step, value, targetValue, lerpPercentage, stepLimit) {
 		var iterpolatedValue = 0;
 		if(lerpPercentage !== false) {
 			iterpolatedValue = ((targetValue - value) * lerpPercentage) * step;
+
+			if(stepLimit && Math.abs(iterpolatedValue) > Math.abs(stepLimit)) {
+				if(Math.sign(iterpolatedValue) == -1) {
+					stepLimit = -stepLimit;
+				}
+				
+				iterpolatedValue = stepLimit;
+			}
 		} else {
 			iterpolatedValue = targetValue - value;
 		}
@@ -250,17 +258,17 @@ export const Vroom = {
 		return iterpolatedValue;
 	},
 
-	lerpPosition: function(step, position, targetPosition, lerpPercentage) {
+	lerpPosition: function(step, position, targetPosition, lerpPercentage, stepLimit) {
 		return {
-			x: this.lerpValue(step, position.x, targetPosition.x, lerpPercentage),
-			y: this.lerpValue(step, position.y, targetPosition.y, lerpPercentage),
+			x: this.lerpValue(step, position.x, targetPosition.x, lerpPercentage, stepLimit),
+			y: this.lerpValue(step, position.y, targetPosition.y, lerpPercentage, stepLimit),
 		};
 	},
 
-	lerpDimensions: function(step, dimensions, targetDimensions, lerpPercentage) {
+	lerpDimensions: function(step, dimensions, targetDimensions, lerpPercentage, stepLimit) {
 		return {
-			width: this.lerpValue(step, dimensions.width, targetDimensions.width, lerpPercentage),
-			height: this.lerpValue(step, dimensions.height, targetDimensions.height, lerpPercentage),
+			width: this.lerpValue(step, dimensions.width, targetDimensions.width, lerpPercentage, stepLimit),
+			height: this.lerpValue(step, dimensions.height, targetDimensions.height, lerpPercentage, stepLimit),
 		};
 	},
 
@@ -338,6 +346,8 @@ export const Vroom = {
 
 	resetMouseState: function() {
 		Vroom.mouseState.clicked = false;
+		Vroom.mouseState.mouseUp = false;
+		Vroom.mouseState.mousedown = false;
 	},
 
 	isMouseOverArea: function(pos, dim, relativeToCamera) {

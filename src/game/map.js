@@ -6,7 +6,7 @@ var map = new VroomEntity(false);
 map.init = function() {
 	this._id = Vroom.generateID();
 
-	this.layer = 4;
+	this.layer = 1;
 
 	this.dim = {
 		width: 5990,
