@@ -33,10 +33,17 @@ astronaut.init = function() {
 	};
 
 	this.speed = 0.1;
+	this.scanning = false;
+	this.scanStart = null;
+	this.scanTime = 2000;
 
 	this.soundStep = new VroomSound('/sound/step.wav');
 	this.soundStep.loadBuffer();
-	this.soundStep.gain = 0.3;
+	this.soundStep.gain = 0.2;
+
+	this.soundScan = new VroomSound('/sound/scan.wav');
+	this.soundScan.loadBuffer();
+	this.soundScan.gain = 0.5;
 
 	// Register entity
 	Vroom.registerEntity(astronaut);
@@ -56,6 +63,30 @@ astronaut.update = function(step) {
 
 		if(!this.soundStep.playing) {
 			this.soundStep.play();
+		}
+	}
+
+	// Scan if space is pressed
+	if(!this.scanning && Vroom.isKeyPressed(32)) {
+		this.scanning = true;
+		this.scanStart = Date.now();
+		this.soundScan.play();
+
+		store.state.resources.electricity -= 10;
+
+		store.state.scanning = true;
+	}
+
+	// Check if scanning
+	if(this.scanning) {
+		// Stop moving
+		this.targetPos.x = this.pos.x;
+		this.targetPos.y = this.pos.y;
+
+		// Check if done scanning
+		if(Date.now() - this.scanStart > this.scanTime) {
+			this.scanning = false;
+			store.state.scanning = false;
 		}
 	}
 
@@ -93,7 +124,7 @@ astronaut.update = function(step) {
 		}
 
 		// Use stamina when moving
-		store.state.resources.stamina -= Vroom.getDistance(cachedPos, this.pos) * 0.01;
+		store.state.resources.oxygen -= Vroom.getDistance(cachedPos, this.pos) * 0.02;
 	} else {
 		if(this.soundStep.playing) {
 			this.soundStep.stop();
@@ -108,8 +139,6 @@ astronaut.render = function(camera) {
 		y: this.pos.y - camera.pos.y,
 	};
 
-	Vroom.ctx.fillStyle = 'white';
-
 	// Target
 	if(this.pos.x !== this.targetPos.x || this.pos.y !== this.targetPos.y) {
 		var relativeTargetPos = {
@@ -117,12 +146,25 @@ astronaut.render = function(camera) {
 			y: this.targetPos.y - camera.pos.y,
 		};
 
+		Vroom.ctx.fillStyle = 'white';
 		Vroom.ctx.beginPath();
 		Vroom.ctx.arc(relativeTargetPos.x, relativeTargetPos.y, 2, 0, 2 * Math.PI, false);
 		Vroom.ctx.fill();
 	}
 
+	// Scan wave
+	if(this.scanning) {
+		var size = Date.now() - this.scanStart;
+		var opacity = 1 - (size / this.scanTime);
+
+		Vroom.ctx.fillStyle = 'rgba(255, 255, 255, ' + opacity +')';
+		Vroom.ctx.beginPath();
+		Vroom.ctx.arc(relativePos.x, relativePos.y, size, 0, 2 * Math.PI, false);
+		Vroom.ctx.fill();
+	}
+
 	// Astronaut
+	Vroom.ctx.fillStyle = 'white';
 	Vroom.ctx.beginPath();
 	Vroom.ctx.arc(relativePos.x, relativePos.y, this.dim.width / 2, 0, 2 * Math.PI, false);
 	Vroom.ctx.fill();

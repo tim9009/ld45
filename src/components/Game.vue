@@ -16,8 +16,6 @@
       <GameUIResources/>
     </div>
 
-    <GameUILog v-if="gameStarted"/>
-
     <transition name="fade">
       <GameUILoseScreen v-if="gameLost"/>
     </transition>

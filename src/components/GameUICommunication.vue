@@ -31,8 +31,9 @@
       }
     },
     mounted() {
-      this.$refs.audio.play()
-      console.log('Communication compontent updated!')
+      if(this.$refs.audio) {
+        this.$refs.audio.play()
+      }
     },
     computed: {
       communication() {

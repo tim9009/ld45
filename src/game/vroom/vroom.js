@@ -313,7 +313,7 @@ export const Vroom = {
 	},
 
 	isKeyPressed: function(keyCode) {
-		key = String.fromCharCode(keyCode);
+		var key = String.fromCharCode(keyCode);
 		if(key) {
 			if(typeof Vroom.keyStateList[key] !== 'undefined' && Vroom.keyStateList[key] === true) {
 				return true;

@@ -8,18 +8,8 @@
     </div>
 
     <div class="GameUIResources__resource">
-        <h2 class="GameUIResources__resource__title">Water</h2>
-        <div class="GameUIResources__resource__indicator" v-bind:value="resources.water"></div>
-    </div>
-
-    <div class="GameUIResources__resource">
-        <h2 class="GameUIResources__resource__title">Stamina</h2>
-        <div class="GameUIResources__resource__indicator" v-bind:value="resources.stamina"></div>
-    </div>
-
-    <div class="GameUIResources__resource">
-        <h2 class="GameUIResources__resource__title">Vital Signs</h2>
-        <div class="GameUIResources__resource__indicator" v-bind:value="resources.health"></div>
+        <h2 class="GameUIResources__resource__title">Electricity</h2>
+        <div class="GameUIResources__resource__indicator" v-bind:value="resources.electricity"></div>
     </div>
   </div>
 </template>
@@ -33,9 +23,7 @@
       resources() {
         return {
           oxygen: Math.floor(store.state.resources.oxygen),
-          water: Math.floor(store.state.resources.water),
-          stamina: Math.floor(store.state.resources.stamina),
-          health: Math.floor(store.state.resources.health)
+          electricity: Math.floor(store.state.resources.electricity)
         }
       }
     }

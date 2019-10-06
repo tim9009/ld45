@@ -24,63 +24,113 @@ function initEngine() {
 			gravityEnabled: false,
 			gravity: {
 				x: 0,
-				y: 0,
+				y: 0
 			},
 			friction: {
 				x: 0.999,
-				y: 0.999,
+				y: 0.999
 			}
-		},
+		}
 	});
 
 	Vroom.updateSize();
 
 	// Init call
 	astronaut.init();
+	store.state.astronautId = astronaut._id;
 	map.init();
 
+	// One
+	var POIOne = new PointOfInterest({
+		pos: {
+			x: 200,
+			y: 288
+		},
+		communication: {
+			image: '/img/communications/water.jpg',
+			text: 'I found fresh drinkable water! Initial testing shows only minor levels of contamination. Nothing our filters can\'t handle.'
+		}
+	});
+	POIOne.init();
+	Vroom.registerEntity(POIOne);
+
 	var taskOne = new Task({
-		text: 'This is a task!',
+		text: 'Find a source of water',
 		condition: function() {
-			return store.state.resources.health <= 50;
+			return POIOne.checked == true;
 		}
 	});
 	taskOne.init();
 	Vroom.registerEntity(taskOne);
 
-	var test = new PointOfInterest({
+	// Two
+	var POITwo = new PointOfInterest({
 		pos: {
-			x: 80,
-			y: 50
+			x: -600,
+			y: -10
 		},
 		communication: {
-			image: '/img/communications/test.jpg',
-			sound: 'https://ia800406.us.archive.org/23/items/PeterHernandezPodcastAudioPlaceholder/AudioPlaceholder.mp3',
-			text: 'Hello World!'
-		},
-		resources: {
-			health: -90
+			image: '/img/communications/vegetation.jpg',
+			text: 'Well, it\'s not the best thing I have ever had, but it is edible. How cool is it that I am now eating something no other human has ever tastet before! Wait, does this mean I get to name this thing? Huh... '
 		}
 	});
-	test.init();
-	Vroom.registerEntity(test);
+	POITwo.init();
+	Vroom.registerEntity(POITwo);
 
-	var testTwo = new PointOfInterest({
-		pos: {
-			x: 120,
-			y: 80
-		},
-		communication: {
-			image: '/img/communications/test.jpg',
-			sound: 'https://ia800406.us.archive.org/23/items/PeterHernandezPodcastAudioPlaceholder/AudioPlaceholder.mp3',
-			text: 'Hello World!'
-		},
-		resources: {
-			health: -10
+	var taskTwo = new Task({
+		text: 'Find edible vegetation',
+		condition: function() {
+			return POITwo.checked == true;
 		}
 	});
-	testTwo.init();
-	Vroom.registerEntity(testTwo);
+	taskTwo.init();
+	Vroom.registerEntity(taskTwo);
+
+	// Three
+	var POIThree = new PointOfInterest({
+		pos: {
+			x: -1000,
+			y: -900
+		},
+		communication: {
+			image: '/img/communications/material.jpg',
+			text: 'This seems like suitable building material. Looks like it is durable enough and it is literally everywhere. On to the next task!'
+		}
+	});
+	POIThree.init();
+	Vroom.registerEntity(POIThree);
+
+	var taskThree = new Task({
+		text: 'Find a suitable building material',
+		condition: function() {
+			return POIThree.checked == true;
+		}
+	});
+	taskThree.init();
+	Vroom.registerEntity(taskThree);
+
+	// Four
+	var POIFour = new PointOfInterest({
+		pos: {
+			x: 880,
+			y: 850
+		},
+		communication: {
+			image: '/img/communications/soil.jpg',
+			text: 'Soil sample collected. Looks good from what I can see, but I need to do more testing.'
+		}
+	});
+	POIFour.init();
+	Vroom.registerEntity(POIFour);
+
+	var taskThree = new Task({
+		text: 'Take a soil sample',
+		condition: function() {
+			return POIFour.checked == true;
+		}
+	});
+	taskThree.init();
+	Vroom.registerEntity(taskThree);
 }
 
 function startGame() {
@@ -109,7 +159,7 @@ function startGame() {
 	// Set focus on window to make the game work when played in an iFrame
 	window.focus();
 
-	console.log('Game started!')
+	console.log('Game started!');
 }
 
 function updateViewportSize() {
@@ -117,7 +167,7 @@ function updateViewportSize() {
 	Vroom.activeCamera.follow(astronaut._id)
 }
 
-Vroom.mainUpdateLoopExtension = function() {
+Vroom.mainUpdateLoopExtension = function(step) {
 	// Check win condition
 	if(!store.state.gameWon) {
 		var allTasksDone = true;
@@ -132,7 +182,7 @@ Vroom.mainUpdateLoopExtension = function() {
 	}
 
 	// Check loss condition
-	if(!store.state.gameLost && store.state.resources.health <= 0) {
+	if(!store.state.gameLost && store.state.resources.oxygen <= 0) {
 		store.state.gameLost = true;
 	}
 };

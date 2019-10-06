@@ -33,7 +33,7 @@
       },
 
       blinkAlert() {
-        return store.state.resources.health <= 10
+        return store.state.resources.oxygen <= 33
       },
     }
   }
