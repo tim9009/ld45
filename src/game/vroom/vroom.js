@@ -111,6 +111,7 @@ export const Vroom = {
 		Vroom.canvas.addEventListener('mousedown', Vroom.handleMouseDown);
 		Vroom.canvas.addEventListener('mouseup', Vroom.handleMouseUp);
 		Vroom.canvas.addEventListener('click', Vroom.handleMouseClick);
+		Vroom.canvas.addEventListener('touch', Vroom.handleMouseClick);
 
 		// Check for canvas resize
 		window.setInterval(function() {
@@ -244,7 +245,7 @@ export const Vroom = {
 				if(Math.sign(iterpolatedValue) == -1) {
 					stepLimit = -stepLimit;
 				}
-				
+
 				iterpolatedValue = stepLimit;
 			}
 		} else {

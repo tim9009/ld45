@@ -49,8 +49,8 @@ astronaut.onCollision = function(target) {
 astronaut.update = function(step) {
 	// Set target to go to
 	if(Vroom.mouseState.clicked == true) {
-		this.targetPos.x = this.pos.x + Vroom.mouseState.pos.x - (Vroom.dim.width / 2);
-		this.targetPos.y = this.pos.y + Vroom.mouseState.pos.y  - (Vroom.dim.height / 2);
+		this.targetPos.x = Vroom.activeCamera.pos.x + Vroom.mouseState.pos.x;
+		this.targetPos.y = Vroom.activeCamera.pos.y + Vroom.mouseState.pos.y;
 	}
 
 	// Move towards target if not already there
@@ -97,6 +97,20 @@ astronaut.render = function(camera) {
 	};
 
 	Vroom.ctx.fillStyle = 'white';
+
+	// Target
+	if(this.pos.x !== this.targetPos.x || this.pos.y !== this.targetPos.y) {
+		var relativeTargetPos = {
+			x: this.targetPos.x - camera.pos.x,
+			y: this.targetPos.y - camera.pos.y,
+		};
+
+		Vroom.ctx.beginPath();
+		Vroom.ctx.arc(relativeTargetPos.x, relativeTargetPos.y, 2, 0, 2 * Math.PI, false);
+		Vroom.ctx.fill();
+	}
+
+	// Astronaut
 	Vroom.ctx.beginPath();
 	Vroom.ctx.arc(relativePos.x, relativePos.y, this.dim.width / 2, 0, 2 * Math.PI, false);
 	Vroom.ctx.fill();
