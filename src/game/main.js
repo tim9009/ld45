@@ -47,7 +47,7 @@ function initEngine() {
 			y: 288
 		},
 		communication: {
-			image: '/img/communications/water.jpg',
+			image: 'img/communications/water.jpg',
 			text: 'I found fresh drinkable water! Initial testing shows only minor levels of contamination. Nothing our filters can\'t handle.'
 		}
 	});
@@ -70,8 +70,8 @@ function initEngine() {
 			y: -10
 		},
 		communication: {
-			image: '/img/communications/vegetation.jpg',
-			text: 'Well, it\'s not the best thing I have ever had, but it is edible. How cool is it that I am now eating something no other human has ever tastet before! Wait, does this mean I get to name this thing? Huh... '
+			image: 'img/communications/vegetation.jpg',
+			text: 'Well, it\'s not the best thing I have ever had, but it is edible. How cool is it that I am now eating something no other human has ever tasted before! Wait, does this mean I get to name this thing? Huh... '
 		}
 	});
 	POITwo.init();
@@ -93,8 +93,8 @@ function initEngine() {
 			y: -900
 		},
 		communication: {
-			image: '/img/communications/material.jpg',
-			text: 'This seems like suitable building material. Looks like it is durable enough and it is literally everywhere. On to the next task!'
+			image: 'img/communications/material.jpg',
+			text: 'This seems like a suitable building material. Looks like it is durable enough and it is literally everywhere. On to the next task!'
 		}
 	});
 	POIThree.init();
@@ -116,7 +116,7 @@ function initEngine() {
 			y: 850
 		},
 		communication: {
-			image: '/img/communications/soil.jpg',
+			image: 'img/communications/soil.jpg',
 			text: 'Soil sample collected. Looks good from what I can see, but I need to do more testing.'
 		}
 	});

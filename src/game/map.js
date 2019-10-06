@@ -25,7 +25,7 @@ map.init = function() {
 		y: 0,
 	};
 
-	this.sprite = new VroomSprite('/img/map.png', false);
+	this.sprite = new VroomSprite('img/map.png', false);
 
 	// Register entity
 	Vroom.registerEntity(map);

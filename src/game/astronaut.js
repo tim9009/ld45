@@ -37,11 +37,11 @@ astronaut.init = function() {
 	this.scanStart = null;
 	this.scanTime = 2000;
 
-	this.soundStep = new VroomSound('/sound/step.wav');
+	this.soundStep = new VroomSound('sound/step.wav');
 	this.soundStep.loadBuffer();
 	this.soundStep.gain = 0.2;
 
-	this.soundScan = new VroomSound('/sound/scan.wav');
+	this.soundScan = new VroomSound('sound/scan.wav');
 	this.soundScan.loadBuffer();
 	this.soundScan.gain = 0.5;
 

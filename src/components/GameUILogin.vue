@@ -53,9 +53,9 @@
 
 <style lang="scss">
   .load-enter-active {
-    transition: all 2s ease-out;
+    transition: all 4s ease-out;
     .GameUIStartScreen__loading__indicator:after {
-      transition: width 2s ease-out;
+      transition: width 4s ease-out;
     }
   }
 
