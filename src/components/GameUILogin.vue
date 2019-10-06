@@ -45,7 +45,6 @@
         this.loginDone = true
       },
       afterLoad() {
-        game.initEngine()
         game.startGame()
       }
     }

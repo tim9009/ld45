@@ -160,12 +160,27 @@ export const Vroom = {
 		Vroom.dim.width = Vroom.canvas.width;
 		Vroom.dim.height = Vroom.canvas.height;
 
+		// var difference = {
+		// 	width: Vroom.canvas.width - Vroom.canvasSizeCache.width,
+		// 	height: Vroom.canvas.height - Vroom.canvasSizeCache.height
+		// };
+
 		Vroom.setCanvasScale();
 
-		// Update camera
+		// Update entity positions
+		// for (var entity in Vroom.entityList) {
+		// 	Vroom.entityList[entity].pos.x += difference.width,
+		// 	Vroom.entityList[entity].pos.y += difference.height
+		// }
 
-		if(Vroom.activeCamera && Vroom.activeCamera.followingID !== null) {
-			Vroom.activeCamera.follow(Vroom.activeCamera.followingID);
+		// Update camera
+		if(Vroom.activeCamera) {
+			// Vroom.activeCamera.pos.x += difference.width;
+			// Vroom.activeCamera.pos.y += difference.height;
+
+			if(Vroom.activeCamera.followingID !== null) {
+				Vroom.activeCamera.follow(Vroom.activeCamera.followingID);
+			}
 		}
 
 		// Update cache

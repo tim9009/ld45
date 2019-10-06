@@ -43,6 +43,9 @@
     created() {
       window.addEventListener("resize", this.handleWindowResize)
     },
+    mounted() {
+      game.initEngine()
+    },
     destroyed() {
       window.removeEventListener("resize", this.handleWindowResize)
     },

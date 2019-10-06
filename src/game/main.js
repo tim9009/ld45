@@ -3,6 +3,7 @@
 import { Vroom } from './vroom/vroom'
 
 import astronaut from './astronaut'
+import map from './map'
 
 import store from '@/store';
 
@@ -33,6 +34,7 @@ function initEngine() {
 
 	// Init call
 	astronaut.init();
+	map.init();
 }
 
 function startGame() {
