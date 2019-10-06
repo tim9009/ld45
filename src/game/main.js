@@ -6,6 +6,7 @@ import astronaut from './astronaut'
 import map from './map'
 
 import { PointOfInterest } from './point_of_interest'
+import { Task } from './task'
 
 import store from '@/store';
 
@@ -37,6 +38,15 @@ function initEngine() {
 	// Init call
 	astronaut.init();
 	map.init();
+
+	var taskOne = new Task({
+		text: 'This is a task!',
+		condition: function() {
+			return store.state.resources.health <= 50;
+		}
+	});
+	taskOne.init();
+	Vroom.registerEntity(taskOne);
 
 	var test = new PointOfInterest({
 		pos: {
@@ -108,6 +118,19 @@ function updateViewportSize() {
 }
 
 Vroom.mainUpdateLoopExtension = function() {
+	// Check win condition
+	if(!store.state.gameWon) {
+		var allTasksDone = true;
+		for (var task in store.state.tasks) {
+			if(!store.state.tasks[task].done) {
+				allTasksDone = false;
+				break;
+			}
+		}
+
+		store.state.gameWon = allTasksDone;
+	}
+
 	// Check loss condition
 	if(!store.state.gameLost && store.state.resources.health <= 0) {
 		store.state.gameLost = true;

@@ -13,20 +13,7 @@ const state = {
     stamina: 100,
     health: 100
   },
-  tasks: [
-    {
-      id: 0,
-      text: 'Test title',
-      available: true,
-      done: false,
-    },
-    {
-      id: 1,
-      text: 'Test title 2',
-      available: false,
-      done: false,
-    }
-  ],
+  tasks: [],
   communication: {
     visible: false,
     image: '',
